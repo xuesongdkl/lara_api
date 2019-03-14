@@ -14,3 +14,6 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+Route::get('/user/login','User\IndexController@login');
+Route::get('/user/center','User\IndexController@uCenter');
