@@ -37,7 +37,7 @@ class IndexController extends Controller
             $http_token = $_SERVER['HTTP_TOKEN'];
 //            print_r($_SERVER);die;
             $key = $this->redis_h_u_key.$uid;
-            $token = Redis::hget($key,'token');
+            $token = Redis::hGet($key,'token');
 
             if($token==$http_token){
                 $response=[
