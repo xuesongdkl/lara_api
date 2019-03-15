@@ -15,5 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-Route::get('/user/login','User\IndexController@login');
-Route::get('/user/center','User\IndexController@uCenter');
+$router->get('/user/login','User\IndexController@login');
+$router->get('/user/center','User\IndexController@uCenter');
+//防刷
+$router->get('/user/order','User\IndexController@order');
