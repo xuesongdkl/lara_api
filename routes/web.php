@@ -19,3 +19,6 @@ $router->get('/user/login','User\IndexController@login');
 $router->get('/user/center','User\IndexController@uCenter');
 //防刷
 $router->get('/user/order','User\IndexController@order');
+
+//登录
+$router->post('/userlogin','User\IndexController@dologin');
