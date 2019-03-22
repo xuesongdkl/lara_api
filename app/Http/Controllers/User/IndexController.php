@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use App\Model\UserModel;
 
 class IndexController extends Controller
 {
@@ -66,38 +66,17 @@ class IndexController extends Controller
         $u_pwd=$request->input('u_pwd');
         $data=[
             'u_name' =>$u_name,
-
+            'u_pwd'  =>$u_pwd
         ];
-        $userInfo=UserModel::where($data)->first();
-        if($userInfo){
-            if(password_verify($u_pwd,$userInfo->password)){
-                $token = substr(md5(time().mt_rand(1,99999)),10,10);
-                $app_login_token='app:login:token:'.$userInfo->uid;
-                Redis::set($app_login_token,$token);
-                Redis::expire($app_login_token,86400);       //设置过期时间
-                $response=[
-                    'errno'  =>   0,
-                    'msg'    =>   '登录成功',
-                    'token'  =>   $token
-                ];
-            }else{
-                $response=[
-                    'errno'  =>   40003,
-                    'msg'    =>   '账号或者密码错误'
-                ];
-            }
-            return $response;
-        }
-//        $url='http://xpassport.52xiuge.com/user/login';
-
-//        $curl = curl_init();                                        //初始化
-//        curl_setopt($curl, CURLOPT_URL,$url);                       //设置抓取的url
-//        curl_setopt($curl, CURLOPT_POST, 1);                        //设置post方式提交
-//        curl_setopt($curl, CURLOPT_POSTFIELDS,['data'=>$data]);
-//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);              //设置获取的信息以文件流的形式返回，而不是直接输出
-//        curl_setopt($curl, CURLOPT_HEADER, 0);                      //设置头文件的信息作为数据流输出
-//        $rs = curl_exec($curl);
-//        var_dump($rs);
+        $url='http://xpassport.52xiuge.com/user/login';
+        $curl = curl_init();                                        //初始化
+        curl_setopt($curl, CURLOPT_URL,$url);                       //设置抓取的url
+        curl_setopt($curl, CURLOPT_POST, 1);                        //设置post方式提交
+        curl_setopt($curl, CURLOPT_POSTFIELDS,['data'=>$data]);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);              //设置获取的信息以文件流的形式返回，而不是直接输出
+        curl_setopt($curl, CURLOPT_HEADER, 0);                      //设置头文件的信息作为数据流输出
+        $rs = curl_exec($curl);
+        var_dump($rs);
     }
 
     /**
