@@ -15,10 +15,14 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('/a', function () use ($router) {
+    echo 111111;
+});
+
 $router->get('/user/login','User\IndexController@login');
 $router->get('/user/center','User\IndexController@uCenter');
 //防刷
 $router->get('/user/order','User\IndexController@order');
 
-//登录
-$router->post('/userlogin','User\IndexController@dologin');
+//登录授权
+$router->post('/usera','User\IndexController@dologin');

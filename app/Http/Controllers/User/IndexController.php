@@ -61,9 +61,9 @@ class IndexController extends Controller
     }
 
     //登录
-    public function dologin(Request $request){
-        $u_name=$request->input('u_name');
-        $u_pwd=$request->input('u_pwd');
+    public function dologin(){
+        $u_name=$_POST['u_name'];
+        $u_pwd=$_POST['u_pwd'];
         $data=[
             'u_name' =>$u_name,
             'u_pwd'  =>$u_pwd

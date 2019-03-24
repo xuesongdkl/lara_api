@@ -22,15 +22,14 @@ class FangshuaMiddleware
 //        echo $uri_hash;echo "<br>";
 
         $ip=$_SERVER['SERVER_ADDR'];     //客户ip
-        echo $ip;
+       // echo $ip;
 
         $redis_key= 'str:' .$uri_hash . ':' .$ip;
-        echo $redis_key;echo "<br>";
+       // echo $redis_key;echo "<br>";
 
         $num=Redis::incr($redis_key);      //+1（字符串）
         Redis::expire($redis_key,60);      //过期时间60秒
 
-        echo 'count: ' .$num;echo "<br>";
 
         //非法请求
         if($num>5){
